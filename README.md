@@ -58,6 +58,11 @@ docker run -it -d --name trojan --net=host --restart=always --privileged jrohy/t
 
 更新管理程序: `source <(curl -sL https://git.io/trojan-install)`
 
+`docker run --name prod-db --restart=always --network trojan -v /home/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=***** -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2`
+
+
+`docker run -it -d --name prod-trojan --network trojan -p 80:80 -p 443:443 --link prod-db --restart=always --privileged jrohy/trojan init`
+
 ## 运行截图
 ![avatar](asset/1.png)
 ![avatar](asset/2.png)
